@@ -13,6 +13,7 @@ import {
 
 import Rating from "../components/Rating";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
+import Loader from "../components/Loader";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
@@ -23,11 +24,12 @@ const ProductScreen = () => {
   } = useGetProductDetailsQuery(productId);
   return (
     <>
+      
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>
       {isLoading ? (
-        <h2>loading...</h2>
+        <Loader />
       ) : error ? (
         <div>{error?.data?.message || error.error}</div>
       ) : (
