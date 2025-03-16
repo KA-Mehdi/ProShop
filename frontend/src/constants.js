@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : '';
+const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : '';
 // API sources
 const PRODUCTS_URL = 'api/products';
 const USERS_URL = 'api/users';
