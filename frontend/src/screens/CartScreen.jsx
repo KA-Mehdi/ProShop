@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import Message from "../components/Message";
-import { addToCart } from "../slices/carteSlice";
+import { addToCart, removeFromCard } from "../slices/carteSlice";
 
 const CartScreen = () => {
 
@@ -25,6 +25,12 @@ const CartScreen = () => {
   const addToCartHandler = async(product, qty) => {
         dispatch(addToCart({...product, qty}))
   }
+  const removeFromCardHandler = async(id) => {
+    console.log('clicked')
+        dispatch(removeFromCard(id))
+  }
+  
+   
   return (
     <div>
       <Row>
@@ -60,7 +66,7 @@ const CartScreen = () => {
                       </Form.Control>
                     </Col>
                     <Col md={2}>
-                        <Button type="button" variant='light' style={{border: 'none'}} >
+                        <Button  onClick={() => removeFromCardHandler(item._id)} type="button" variant='light' style={{border: 'none'}} >
                             <FaTrash />
                         </Button>
                     </Col>
