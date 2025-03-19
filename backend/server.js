@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
 import cors from "cors";
 import connectDB from "./config/db.js";
 import products from "./data/products.js";
@@ -9,7 +10,6 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import bodyParser from "body-parser";
 
 
-dotenv.config();
 
 // Connect to the database
 connectDB();
