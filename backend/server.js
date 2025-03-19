@@ -8,6 +8,7 @@ import productRoutes from "./routes/productsRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import bodyParser from "body-parser";
+import cookieParser  from "cookie-parser";
 
 
 
@@ -21,6 +22,8 @@ app.use(express.json());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//cookieparser middleware
+app.use(cookieParser())
 
 // Routes
 app.get("/", (req, res) => {
