@@ -30,7 +30,12 @@ app.get("/", (req, res) => {
   res.send("API is running");
 });
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3000', // Frontend URL
+  credentials: true, // Allow cookies to be sent with the request
+};
+
+app.use(cors(corsOptions));
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
