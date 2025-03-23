@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : {
-      cartItems: []
+      cartItems: [], shippingAddress: {}, paymentMethod: 'Paypal'
     };
 
 // const initialState = {
@@ -61,9 +61,13 @@ const carteSlice = createSlice({
       state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
       localStorage.setItem("cart", JSON.stringify(state));
     },
+    saveShippingAddress: (state, action) => {
+      state.shippingAddress = action.payload
+      localStorage.setItem("cart", JSON.stringify(state) )
+    }
   },
 });
 
-export const { addToCart, removeFromCard } = carteSlice.actions;
+export const { addToCart, removeFromCard, saveShippingAddress  } = carteSlice.actions;
 
 export default carteSlice.reducer; // Export the reducer from the slice
