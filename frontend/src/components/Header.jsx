@@ -30,10 +30,8 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
+      <Navbar bg="danger" variant="dark" expand="md" collapseOnSelect className="py-1" >
         <Container>
-          {" "}
-          a
           <Navbar.Brand as={Link} to="/">
             <img src={logo} alt="proshop " />
             ProShop

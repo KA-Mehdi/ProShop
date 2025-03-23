@@ -64,10 +64,14 @@ const carteSlice = createSlice({
     saveShippingAddress: (state, action) => {
       state.shippingAddress = action.payload
       localStorage.setItem("cart", JSON.stringify(state) )
+    },
+    savePaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload
+      localStorage.setItem("cart", JSON.stringify(state))
     }
   },
 });
 
-export const { addToCart, removeFromCard, saveShippingAddress  } = carteSlice.actions;
+export const { addToCart, removeFromCard, saveShippingAddress, savePaymentMethod  } = carteSlice.actions;
 
 export default carteSlice.reducer; // Export the reducer from the slice
