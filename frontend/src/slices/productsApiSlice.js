@@ -13,7 +13,6 @@ export const productApiSlice = apiSlice.injectEndpoints({
         query: (productId) => ({
           url: `${PRODUCTS_URL}/${productId}`,
         }),
-        
         keepUnusedDataFor: 5,
       }),
 }),
