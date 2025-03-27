@@ -23,7 +23,6 @@ const ShippingScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(saveShippingAddress({address, city, postalCode, country}))
-    console.log(cart);
     navigate('/payment')
   };
   return (
@@ -50,7 +49,7 @@ const ShippingScreen = () => {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="postalCode" className="my-2">
-          <Form.Label>postalCode</Form.Label>
+          <Form.Label>Postal Code</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter postalCode"
@@ -59,7 +58,7 @@ const ShippingScreen = () => {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="country" className="my-2">
-          <Form.Label>country</Form.Label>
+          <Form.Label>Country</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter country"

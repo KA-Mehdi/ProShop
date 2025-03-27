@@ -76,10 +76,10 @@ const PlaceOrderScreen = () => {
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroupItem>
-              <h2>shipping</h2>
+              <h2>Shipping</h2>
               <p>
                 <strong>Address:</strong> {" "} 
-                {cart.shippingAddress.address},{cart.shippingAddress.city} {" "}
+                {cart.shippingAddress?.address},{cart.shippingAddress.city} {" "}
                 {cart.shippingAddress.postalCode}, {" "}
                 {cart.shippingAddress.country}
               </p>
@@ -152,12 +152,7 @@ const PlaceOrderScreen = () => {
                   <Col>${cart.itemsPrice}</Col>
                 </Row>
               </ListGroupItem>
-              <ListGroupItem>
-                <Row>
-                  <Col>Items:</Col>
-                  <Col>${cart.itemsPrice}</Col>
-                </Row>
-              </ListGroupItem>
+              
               <ListGroupItem>
                 <Row>
                   <Col>Shipping:</Col>
@@ -190,7 +185,7 @@ const PlaceOrderScreen = () => {
                   disabled={cart.cartItems.length === 0}
                   onClick={placeOrderHandler}
                 >
-                  place order
+                  Place Order
                 </Button>
                 {/* {isLoading && <Loader />} */}
               </ListGroupItem>
