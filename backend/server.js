@@ -9,9 +9,7 @@ import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import bodyParser from "body-parser";
-import cookieParser  from "cookie-parser";
-
-
+import cookieParser from "cookie-parser";
 
 // Connect to the database
 connectDB();
@@ -19,12 +17,12 @@ connectDB();
 const app = express();
 
 //middlware: body parser
-app.use(express.json()); 
-app.use(bodyParser.json())
+app.use(express.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //cookieparser middleware
-app.use(cookieParser())
+app.use(cookieParser());
 
 // Routes
 app.get("/", (req, res) => {
@@ -32,7 +30,7 @@ app.get("/", (req, res) => {
 });
 // Middleware
 const corsOptions = {
-  origin: 'http://localhost:3000', // Frontend URL
+  origin: "http://localhost:3000", // Frontend URL
   credentials: true, // Allow cookies to be sent with the request
 };
 
@@ -41,9 +39,13 @@ app.use(cors(corsOptions));
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
+
+app.get("/api/config/paypal", (req, res) =>
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
+);
+
 app.use(notFound);
 app.use(errorHandler);
-
 
 // Start the server
 const PORT = process.env.PORT || 8000;
