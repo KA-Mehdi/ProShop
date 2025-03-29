@@ -23,13 +23,17 @@ const CartScreen = () => {
   const { cartItems } = cart;
 
   const addToCartHandler = async(product, qty) => {
+    console.log('ff')
         dispatch(addToCart({...product, qty}))
+        navigate('/shipping')
   }
   const removeFromCardHandler = async(id) => {
     console.log('clicked')
         dispatch(removeFromCard(id))
   }
-  
+  const checkoutHandler = () => {
+    navigate('/login?redirect=/shipping');
+  };
    
   return (
     <div>
@@ -86,7 +90,7 @@ const CartScreen = () => {
                     ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
                 </ListGroup.Item>
                 <ListGroupItem>
-                    <Button type="button" className="btn-block" disabled={cartItems.length === 0} variant="light">
+                    <Button type="button" className="btn-block" disabled={cartItems.length === 0} variant="light" onClick={checkoutHandler}>
                         Proceed To Checkout
                     </Button>
                 </ListGroupItem>
