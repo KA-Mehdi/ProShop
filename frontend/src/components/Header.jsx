@@ -11,26 +11,30 @@ const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [logoutApiCall] = useLogoutMutation()
+  const [logoutApiCall] = useLogoutMutation();
 
   const logoutHandler = async () => {
     try {
-      await logoutApiCall().unwrap()
-      dispatch(logout())
-      navigate('/login')
-
-    }catch (err) {
-      console.log(err)
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
     }
-  }
-  
+  };
 
   return (
     <header>
-      <Navbar bg="danger" variant="dark" expand="md" collapseOnSelect className="py-1" >
+      <Navbar
+        bg="danger"
+        variant="dark"
+        expand="md"
+        collapseOnSelect
+        className="py-1"
+      >
         <Container>
           <Navbar.Brand as={Link} to="/">
             <img src={logo} alt="proshop " />
@@ -44,31 +48,40 @@ const Header = () => {
                 <FaShoppingCart /> Cart
                 {cartItems.length > 0 && (
                   <Badge pill bg="success" style={{ marginLeft: "5px" }}>
-                    {cartItems.reduce((a, c) => a + c.qty,0)}
+                    {cartItems.reduce((a, c) => a + c.qty, 0)}
                   </Badge>
                 )}
               </Nav.Link>
 
-                { userInfo ? (
-                  <NavDropdown title={userInfo.name} id='username'>
-                    
-                      <NavDropdown.Item as={Link} to='/profile'>
-                        Profile
-                      </NavDropdown.Item>
-                    
-                      <NavDropdown.Item onClick={logoutHandler}>
-                          Logout
-                      </NavDropdown.Item>
-                    
-                  </NavDropdown>
-                ) 
-                :
-                 (
-                    <Nav.Link as={Link} to="/login">
-                      <FaUser />
-                          Sign In
-                    </Nav.Link>
-                 )}
+              {userInfo ? (
+                <NavDropdown title={userInfo.name} id="username">
+                  <NavDropdown.Item as={Link} to="/profile">
+                    Profile
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <Nav.Link as={Link} to="/login">
+                  <FaUser />
+                  Sign In
+                </Nav.Link>
+              )}
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title="Admin" id="adminmenu">
+                  <NavDropdown.Item as={Link} to="/admin/productList">
+                    Products
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/userList">
+                    Users
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/admin/orderList">
+                    Orders
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

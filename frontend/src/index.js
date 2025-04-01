@@ -20,9 +20,11 @@ import ShippingScreen from "./screens/ShippingScreen";
 import PrivateRoute from "./components/PrivateRoute";
 import PaymentMethod from "./screens/PaymentMethod";
 import PlaceOrderScreen  from "./screens/PlaceOrderScreen";
-import OrderScreen from "./screens/OrderScreen";
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import ProfileScreen from "./screens/ProfileScreen";
+import AdminRoute from "./components/AdminRoute";
+import OrderListScreen from "./components/OrderListScreen";
+import OrderScreen from "./screens/admin/OrderScreen";
 
 
 const router = createBrowserRouter(
@@ -42,6 +44,11 @@ const router = createBrowserRouter(
         <Route path="/placeorder" element={<PlaceOrderScreen />}/>
         <Route path="/order/:id" element={<OrderScreen />}/>
         <Route path="/profile" element={<ProfileScreen />}/>
+      </Route>
+
+      {/* insert any route you want it to be entered by admin */}
+      <Route  element={<AdminRoute />}>
+        <Route path="/admin/orderList" element={<OrderListScreen />}/>
       </Route>
     </Route>
   )

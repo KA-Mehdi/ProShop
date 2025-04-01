@@ -12,13 +12,13 @@ import {
 } from "react-bootstrap";
 import { toast, Toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
+import Message from "../../components/Message";
+import Loader from "../../components/Loader";
 import {
   useGetOrderDetailsQuery,
   usePayOrderMutation,
   useGetPayPalClientIdQuery,
-} from "../slices/ordersApiSlice";
+} from "../../slices/ordersApiSlice";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 const OrderScreen = () => {
