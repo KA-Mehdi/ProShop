@@ -13,12 +13,13 @@ import {
 } from "react-bootstrap";
 import { toast, Toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import Message from "./Message";
-import Loader from "./Loader";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
 import {
   useGetOrderDetailsQuery,
   usePayOrderMutation,
   useGetPayPalClientIdQuery,
+  useDeliverOrderMutation 
 } from "../slices/ordersApiSlice";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
@@ -31,10 +32,11 @@ const OrderScreen = () => {
     error,
   } = useGetOrderDetailsQuery(orderId);
 
-//   console.log("this is " + JSON.stringify(order));
 
   const [payOrder, { isLoading: loadinPay }] = usePayOrderMutation();
 
+  const [deliverOrder, { isLoading: loadingDeliver }] = useDeliverOrderMutation();
+  
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
   const {
@@ -102,7 +104,15 @@ const OrderScreen = () => {
   function onError(err) {
     toast.error(err.message);
   }
-
+  const deliverHandler = async () => {
+    try {
+      await deliverOrder(orderId);
+      refetch();
+      toast.success('Order Delivered')
+    } catch (err) {
+      toast.error(err?.data?.message  || err.message)
+    }
+  };
   return isLoading ? (
     <Loader />
   ) : error ? (
@@ -219,6 +229,22 @@ const OrderScreen = () => {
                   )}
                 </ListGroupItem>
               )}
+              {loadingDeliver && <Loader />}
+
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type='button'
+                      className='btn btn-block'
+                      onClick={deliverHandler}
+                    >
+                      Mark As Delivered
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>
