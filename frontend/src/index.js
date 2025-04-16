@@ -23,9 +23,9 @@ import PlaceOrderScreen  from "./screens/PlaceOrderScreen";
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import ProfileScreen from "./screens/ProfileScreen";
 import AdminRoute from "./components/AdminRoute";
-import OrderListScreen from "./components/OrderListScreen";
-import OrderScreen from "./screens/admin/OrderScreen";
+import OrderListScreen from "./screens/admin/OrderListScreen"
 
+import OrderScreen from "./components/OrderScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -12,18 +13,17 @@ import {
 } from "react-bootstrap";
 import { toast, Toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import Message from "../../components/Message";
-import Loader from "../../components/Loader";
+import Message from "./Message";
+import Loader from "./Loader";
 import {
   useGetOrderDetailsQuery,
   usePayOrderMutation,
   useGetPayPalClientIdQuery,
-} from "../../slices/ordersApiSlice";
+} from "../slices/ordersApiSlice";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 const OrderScreen = () => {
   const { id: orderId } = useParams();
-
   const {
     data: order,
     refetch,
